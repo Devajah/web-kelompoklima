@@ -1,0 +1,38 @@
+[
+  {
+    "name": "RAFAEL",
+    "role": "Project Leader",
+    "description": "Bertanggung jawab atas koordinasi tim dan strategi pengembangan proyek. - Rafael Andhika Ransyah",
+    "photo": "/foto/pael1.jpeg"
+  },
+  {
+    "name": "RINA",
+    "role": "UI/UX Designer",
+    "description": "Mendesain pengalaman pengguna yang intuitif dan antarmuka yang menarik. - Rina Junita",
+    "photo": "/foto/rina1.jpg"
+  },
+  {
+    "name": "DEVARA",
+    "role": "Frontend Developer",
+    "description": "Mengimplementasikan desain menjadi kode yang responsif dan interaktif. - Devara Akbar Nur Maydias",
+    "photo": "/foto/devara1.jpeg"
+  },
+  {
+    "name": "IVAN",
+    "role": "Backend Developer",
+    "description": "Membangun infrastruktur server dan API yang handal dan aman. - Ivan Adhi Prasetyo",
+    "photo": "/foto/ipan1.jpeg"
+  },
+  {
+    "name": "AFRI",
+    "role": "Data Analyst",
+    "description": "Menganalisis data dan memberikan insight untuk pengambilan keputusan. - Afri Setyaningsih",
+    "photo": "/foto/afri1.jpg"
+  },
+  {
+    "name": "SINTYA",
+    "role": "Quality Assurance",
+    "description": "Memastikan kualitas produk melalui testing yang komprehensif. - Sintya Mukaromah",
+    "photo": "/foto/sintya1.jpg"
+  }
+]

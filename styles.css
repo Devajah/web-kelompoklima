@@ -1,0 +1,247 @@
+/* Palet warna ungu harmonis */
+:root {
+  --purple-dark: #4b0082;
+  --purple-primary: #6a0dad;
+  --purple-secondary: #9b30ff;
+  --purple-light: #d8b4fe;
+  --purple-bg: #f3e8ff;
+  --text-dark: #2e0854;
+  --text-light: #fafafa;
+}
+
+/* Reset dan dasar */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--purple-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: var(--purple-dark);
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.125rem;
+  color: var(--purple-primary);
+}
+
+/* Grid anggota */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Kartu anggota */
+.member-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(106, 13, 173, 0.2);
+  padding: 1.5rem 1rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 4px;
+}
+
+.member-card:focus,
+.member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(106, 13, 173, 0.4);
+  outline: 2px solid var(--purple-secondary);
+}
+
+.member-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--purple-light);
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.member-card:hover .member-photo,
+.member-card:focus .member-photo {
+  border-color: var(--purple-primary);
+}
+
+.member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--purple-dark);
+  margin: 0.25rem 0;
+}
+
+.member-role {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--purple-secondary);
+  margin: 0;
+}
+
+/* Detail anggota */
+.detail {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(106, 13, 173, 0.3);
+  padding: 2rem;
+  margin: 2rem 0;
+  position: relative;
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}
+
+#close-detail {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--purple-secondary);
+  border: none;
+  color: var(--text-light);
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#close-detail:hover,
+#close-detail:focus {
+  background: var(--purple-dark);
+  outline: none;
+}
+
+#member-detail img {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  text-align: center;
+  object-fit: cover;
+  border: 4px solid var(--purple-primary);
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+#member-detail h2 {
+  text-align: center;
+  color: var(--purple-dark);
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+#member-detail h3 {
+  text-align: center;
+  color: var(--purple-secondary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+#member-detail p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Ringkasan tim */
+.team-summary {
+  background: var(--purple-dark);
+  color: var(--text-light);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.team-summary h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.team-summary p {
+  font-size: 1.125rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Animasi muncul detail */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animasi hilang detail */
+@keyframes fadeSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.detail {
+  /* ... style sebelumnya ... */
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.detail.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: fadeSlideIn 0.4s forwards;
+}
+
+.detail.hide {
+  animation: fadeSlideOut 0.3s forwards;
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  #member-detail img {
+    width: 96px;
+    height: 96px;
+  }
+}

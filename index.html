@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perkenalan Group Five</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>12 TKJ 1 - Kelompok 5</h1>
+      <p>Kenali anggota dari kelompok lima yang berdedikasi untuk memberikan hasil
+         terbaik.</p>
+    </header>
+
+    <section id="members-grid" class="grid"></section>
+
+    <section id="member-detail" class="detail hidden">
+      <button id="close-detail" aria-label="Tutup detail anggota">&times;</button>
+      <img id="detail-photo" src="/members.json" alt="foto" />
+      <h2 id="detail-name"></h2>
+      <h3 id="detail-role"></h3>
+      <p id="detail-description"></p>
+    </section>
+
+    <section class="team-summary">
+      <h2>Tentang Tim Kami</h2>
+      <p>
+        Kami adalah tim yang bersemangat dengan berbagai latar belakang keahlian.
+         Bersama-sama, kami berkomitmen untuk memberikan solusi terbaik dan inovatif
+          untuk setiap tantangan yang dihadapi.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Load members data from JSON file
+    async function loadMembers() {
+      const response = await fetch('members.json');
+      const members = await response.json();
+      return members;
+    }
+
+    function createMemberCard(member, index) {
+      const card = document.createElement('article');
+      card.className = 'member-card';
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-pressed', 'false');
+      card.setAttribute('aria-label', `Lihat detail ${member.name}`);
+
+      card.innerHTML = `
+        <img src="${member.photo}" alt="Foto ${member.name}" class="member-photo" />
+        <h3 class="member-name">${member.name}</h3>
+        <p class="member-role">${member.role}</p>
+      `;
+
+      card.addEventListener('click', () => showDetail(member));
+      card.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showDetail(member);
+        }
+      });
+
+      return card;
+    }
+
+    function showDetail(member) {
+  const detailSection = document.getElementById('member-detail');
+  document.getElementById('detail-photo').src = member.photo;
+  document.getElementById('detail-photo').alt = 'Foto detail ${member.name}';
+  document.getElementById('detail-name').textContent = member.name;
+  document.getElementById('detail-role').textContent = member.role;
+  document.getElementById('detail-description').textContent = member.description;
+
+  // Remove hide class if any
+  detailSection.classList.remove('hide');
+  // Add show class to trigger animation
+  detailSection.classList.add('show');
+  // Remove hidden class to make visible
+  detailSection.classList.remove('hidden');
+
+  // Scroll smoothly to detail section
+  detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Set focus for accessibility
+  detailSection.setAttribute('tabindex', '-1');
+  detailSection.focus();
+}
+
+function closeDetail() {
+  const detailSection = document.getElementById('member-detail');
+  // Add hide class to trigger fade out animation
+  detailSection.classList.add('hide');
+  // Remove show class
+  detailSection.classList.remove('show');
+
+  // Setelah animasi selesai, sembunyikan elemen
+  detailSection.addEventListener('animationend', function handler() {
+    detailSection.classList.add('hidden');
+    detailSection.classList.remove('hide');
+    detailSection.removeEventListener('animationend', handler);
+  });
+}
+
+    document.getElementById('close-detail').addEventListener('click', closeDetail);
+
+    // Close detail on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDetail();
+      }
+    });
+
+    // Initialize
+    (async () => {
+      const members = await loadMembers();
+      const grid = document.getElementById('members-grid');
+      members.forEach((member, index) => {
+        const card = createMemberCard(member, index);
+        grid.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>
